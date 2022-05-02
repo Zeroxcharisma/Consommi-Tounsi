@@ -1,0 +1,90 @@
+<p>bill works!</p>
+
+<div class ="container mt-5" *ngIf = "tableMode">
+    <h2>  Liste of bills</h2 >
+    <button (click) = "onAdd()" > Add New bill</button>
+
+    <input #filterinput                 >
+    <table class="table">
+<thead>
+   <tr>
+     <th>id</th>
+     <th>montant </th>
+     <th>dateBill</th>
+     <th>paymentType</th>
+     <th>orderid</th>
+    
+     <th>actions</th>
+   </tr>
+ </thead>
+
+ <tbody>
+   <tr *ngFor="let bill of tab  |billfilter:filterinput|async "     >
+       <td>{{bill.idBill}}</td>
+       <td>{{bill.montant }}</td>
+       <td>{{bill.dateBill}}</td>
+       <td>{{bill.paymentType }}</td>
+       <td>{{bill.order?.idOrder}}</td>
+     
+       <td>
+         <button pRipple class="button" style="width: 110px;" (click)=" onDelete(bill.idBill)">delete &nbsp; &nbsp;</button>
+         <button pRipple class="button" style="width: 110px;" (click)=" onupdateBill(bill)">Update &nbsp; &nbsp;</button>
+         <button pRipple class="button" style="width: 110px;" (click)=" openDialog(bill.idBill)">checkout &nbsp; &nbsp;</button>
+       </td>
+   </tr>
+ </tbody>
+    </table>
+</div>
+
+
+<div class ="container mt-5"   *ngIf = "editMode || addmode" >
+   <h2> {{ header }}</h2 >
+ 
+       <div class ="col">
+   
+
+           <form  [formGroup] = "Form">
+               <mat-form-field appearance="legacy">
+                 <mat-label  for="montant">montant</mat-label>
+                 <input matInput type="number" id="montant"  class="bg-none" formControlName="montant" required>
+               </mat-form-field>
+             </form>
+             <form  [formGroup] = "Form">
+                <mat-form-field appearance="legacy">
+                  <mat-label  for="dateBill">date</mat-label>
+                  <input matInput type="date" id="dateBill"  class="bg-none" formControlName="dateBill" required>
+                </mat-form-field>
+              </form>
+
+           <form  [formGroup] = "Form">
+             <mat-form-field appearance="legacy">
+               <mat-label  for="paymentType">paymentType</mat-label>
+               <input matInput type="string" id="paymentType"  class="bg-none" formControlName="paymentType" required>
+             </mat-form-field>
+           </form>
+           <form  [formGroup] = "Form">
+            <mat-form-field appearance="legacy">
+              <mat-label  for="">order</mat-label>
+              
+              <mat-select formControlName="order">
+                <mat-option *ngFor="let order of orders" [value]="order">
+                  {{order.idOrder}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+
+           
+
+
+
+          
+
+         </div>
+     
+         <div class ="col">
+           <button pRipple class="button" style="width: 110px;" (click)=" onSubnit()">Save &nbsp; &nbsp;</button>
+     </div>
+
+
+ </div>
