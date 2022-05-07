@@ -8,6 +8,7 @@ import tn.esprit.springboot.entity.Bill;
 
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Objects;
 
 
 public class BillPdfExporter {
@@ -17,26 +18,61 @@ public class BillPdfExporter {
         this.listBills = listBills;
     }
 
-    private void writeTableHeader(PdfPTable table) {
+    private void writeBillTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(BaseColor.BLUE);
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
         cell.setPadding(5);
 
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
-        font.setColor(BaseColor.WHITE);
+        font.setColor(BaseColor.BLACK);
 
         cell.setPhrase(new Phrase("Bill ID", font));
 
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("montant", font));
+        cell.setPhrase(new Phrase("Montant", font));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Moyens de paiement", font));
         table.addCell(cell);
     }
 
-    private void writeTableData(PdfPTable table) {
+    private void writeBillTableData(PdfPTable table) {
         for (Bill bill : listBills) {
             table.addCell(String.valueOf(bill.getIdBill()));
             table.addCell(Double.toString(bill.getMontant()));
+            table.addCell(bill.getPaymentType().toString());
+        }
+    }
+
+
+
+    private void writeOrderTableHeader(PdfPTable table) {
+        PdfPCell cell = new PdfPCell();
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        cell.setPadding(5);
+
+        Font font = FontFactory.getFont(FontFactory.HELVETICA);
+        font.setColor(BaseColor.BLACK);
+
+        cell.setPhrase(new Phrase("Montant", font));
+
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("N° Produit", font));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Date", font));
+        table.addCell(cell);
+    }
+
+    private void writeOrderTableData(PdfPTable table) {
+        for (Bill bill : listBills) {
+            if (Objects.nonNull(bill.getOrder())) {
+                table.addCell(String.valueOf(bill.getOrder().getAmountOrder()));
+                table.addCell(Double.toString(bill.getOrder().getProductNumberOrder()));
+                table.addCell(bill.getOrder().getDateOrder().toString());
+            }
         }
     }
 
@@ -49,20 +85,39 @@ public class BillPdfExporter {
         font.setSize(18);
         font.setColor(BaseColor.BLUE);
 
-        Paragraph p = new Paragraph("List of Bills", font);
-        p.setAlignment(Paragraph.ALIGN_CENTER);
+        Paragraph billParagraph = new Paragraph("Bill Details", font);
+        billParagraph.setAlignment(Paragraph.ALIGN_CENTER);
 
-        document.add(p);
+        document.add(billParagraph);
 
-        PdfPTable table = new PdfPTable(2);
-        table.setWidthPercentage(100f);
-        table.setWidths(new float[] {1.5f, 3.5f});
-        table.setSpacingBefore(10);
+        // bill table start
+        PdfPTable billTable = new PdfPTable(3);
+        billTable.setWidthPercentage(100f);
+        billTable.setWidths(new float[] {1.5f, 3.5f, 3.5f});
+        billTable.setSpacingBefore(10);
 
-        writeTableHeader(table);
-        writeTableData(table);
+        writeBillTableHeader(billTable);
+        writeBillTableData(billTable);
 
-        document.add(table);
+        document.add(billTable);
+        // bill table end
+
+        // order table start
+
+        Paragraph orderParagraph = new Paragraph("Order Details", font);
+        orderParagraph.setAlignment(Paragraph.ALIGN_CENTER);
+        document.add(orderParagraph);
+
+        PdfPTable orderTable = new PdfPTable(3);
+        orderTable.setWidthPercentage(100f);
+        orderTable.setWidths(new float[] {1.5f, 3.5f, 3.5f});
+        orderTable.setSpacingBefore(10);
+
+        writeOrderTableHeader(orderTable);
+        writeOrderTableData(orderTable);
+
+        document.add(orderTable);
+
 
         document.close();
     }

@@ -38,14 +38,14 @@ export class BillService {
 
 
   deleteBill(id: number): Observable<any> {
-  //return this.http.delete<void>(`${this.baseUrl}/delete-order/"${id}`);
-  return this.http.delete(`${this.baseUrl}/delete-bill/${id}`);
+    //return this.http.delete<void>(`${this.baseUrl}/delete-order/"${id}`);
+    return this.http.delete(`${this.baseUrl}/delete-bill/${id}`);
   }
 
   getPDF(id: number): Observable<any> {
-  return this.http.get(`${this.baseUrl}/pdf/${id}`, {
-    responseType: 'blob'
-  });
+    return this.http.get(`${this.baseUrl}/pdf/${id}`, {
+      responseType: 'blob'
+    });
   }
 
 

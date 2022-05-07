@@ -118,10 +118,9 @@ public class BillController {
 
 	@GetMapping("/pdf/{idBill}")
 	@ResponseBody
-	public ResponseEntity<StreamingResponseBody> getPDF (@PathVariable("idBill")Long idBill) throws Exception{
+	public ResponseEntity<StreamingResponseBody> getPDF (@PathVariable("idBill")Long idBill) {
 		Bill bill = this.billService.getbillByid(idBill);
 		BillPdfExporter billPdfExporter = new BillPdfExporter(Collections.singletonList(bill));
-		;
 		StreamingResponseBody body = outputStream -> {
 			try {
 				billPdfExporter.export(outputStream);

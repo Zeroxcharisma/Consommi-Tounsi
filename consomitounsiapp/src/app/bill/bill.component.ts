@@ -135,6 +135,6 @@ openDialog(idBill:number): void {
 
 
   export(idBill: any) {
-    this.billService.getPDF(idBill).subscribe(blob => saveAs(blob, 'fileName.pdf'))
+    this.billService.getPDF(idBill).subscribe(blob => saveAs(blob, `${idBill}.pdf`))
   }
 }
