@@ -1,9 +1,17 @@
 package tn.esprit.springboot.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +29,12 @@ import com.stripe.model.Charge;
 
 import http.PaymentIntentDto;
 import http.PaymentIntentDto.Currency;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import tn.esprit.springboot.entity.Bill;
 import tn.esprit.springboot.entity.PaymentType;
 import tn.esprit.springboot.service.IBillService;
 import tn.esprit.springboot.service.PaymentService;
+import tn.esprit.springboot.utils.BillPdfExporter;
 
 
 @CrossOrigin(origins = "*")
@@ -104,5 +114,22 @@ public class BillController {
 				
 
 			}
+
+
+	@GetMapping("/pdf/{idBill}")
+	@ResponseBody
+	public ResponseEntity<StreamingResponseBody> getPDF (@PathVariable("idBill")Long idBill) throws Exception{
+		Bill bill = this.billService.getbillByid(idBill);
+		BillPdfExporter billPdfExporter = new BillPdfExporter(Collections.singletonList(bill));
+		;
+		StreamingResponseBody body = outputStream -> {
+			try {
+				billPdfExporter.export(outputStream);
+			} catch (DocumentException e) {
+				throw new RuntimeException(e);
+			}
+		};
+		return new ResponseEntity<>(body, HttpStatus.OK);
+	}
 
 }

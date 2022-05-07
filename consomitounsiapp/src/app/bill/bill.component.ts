@@ -8,6 +8,7 @@ import {OrderService } from 'src/app/order.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { CheckoutComponent } from '../checkout/checkout.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-bill',
@@ -38,16 +39,16 @@ export class BillComponent implements OnInit {
     this.getAllBills()
     this.  createBillGroup()
     this.orderService.findUnlinkedOrders().subscribe((orders)=>{
-   this.orders=orders.body||[]; 
+   this.orders=orders.body||[];
    console.log( this.orders)
     })
-    
-    
+
+
 
   }
 
 
-  
+
   getAllBills() {
       this.billService.getBill().subscribe((data:any) => {
         let bill = data.body;
@@ -62,7 +63,7 @@ export class BillComponent implements OnInit {
   //create the order form group
   createBillGroup(){
     this.Form =  this.fb.group({
-      idBill : this.fb.control(this.bill.idBill),                         
+      idBill : this.fb.control(this.bill.idBill),
       montant: this.fb.control(this.bill.montant),
       dateBill: this.fb.control(this.bill. dateBill),
       paymentType: this.fb.control(this.bill. paymentType),
@@ -70,7 +71,7 @@ export class BillComponent implements OnInit {
       //idBill: this.fb.control(this.bill.idBill),
     });
   }
-  
+
 
   onAdd(){
     this.addmode = true;
@@ -78,34 +79,30 @@ export class BillComponent implements OnInit {
     this.tableMode = false;
     this.header = "Add New bill";
       }
-     
+
 
 
  onSubnit(){
-  let bill = new Bill();
- 
-  this.billService.createBill( this.Form.value).subscribe((data: any) => {
+   const bill = this.Form.value;
+   delete bill.idBill;
+   this.billService.createBill(bill).subscribe((data: any) => {
       console.log(data);
+    this.tableMode = true;
+    this.editMode = false;
+    this.addmode = false;
+    window.location.reload();
     },
    );
 
-   this.tableMode = true;
-   this.editMode = false;
-   this.addmode = false;
-   window.location.reload();
- 
+
+
 }
 
 onDelete(id:number){
   this.billService. deleteBill(id).subscribe((data: any) => {
     console.log(data);
-  }, 
+  },
  );
-
-
-
-
-
 }
 
 
@@ -118,7 +115,7 @@ onupdateBill(bill: Bill): void {
 this.Form.patchValue(bill);
 this.bill=bill;
 
- 
+
    if( this.bill.idBill !=""){
     this.header = "Edit :" + this.bill.idBill ;
   }
@@ -137,5 +134,7 @@ openDialog(idBill:number): void {
 }
 
 
-
+  export(idBill: any) {
+    this.billService.getPDF(idBill).subscribe(blob => saveAs(blob, 'fileName.pdf'))
+  }
 }

@@ -40,7 +40,9 @@ public class Bill implements Serializable {
 	
 	@Column(name = "isPayed")
 	private boolean isPayed=false;
-	
+
+	@OneToOne(cascade = CascadeType.REMOVE)
+	private Order order;
 
 
 	public boolean isPayed() {
@@ -50,9 +52,6 @@ public class Bill implements Serializable {
 	public void setPayed(boolean isPayed) {
 		this.isPayed = isPayed;
 	}
-
-	@OneToOne(cascade = CascadeType.REMOVE)
-	private Order order;
 
 	public long getIdBill() {
 		return idBill;
