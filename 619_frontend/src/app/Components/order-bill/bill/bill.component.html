@@ -3,7 +3,14 @@
     <h2>  Liste of bills</h2 >
     <button (click) = "onAdd()" > Add New bill</button>
 
-    <input #filterinput                 >
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">
+        <mat-icon>search</mat-icon>
+      </span>
+    </div>
+    <input #filterinput type="text" class="form-control" placeholder="">
+  </div>
     <table class="table">
 <thead>
    <tr>
@@ -12,7 +19,6 @@
      <th>dateBill</th>
      <th>paymentType</th>
      <th>orderid</th>
-
      <th>actions</th>
    </tr>
  </thead>
