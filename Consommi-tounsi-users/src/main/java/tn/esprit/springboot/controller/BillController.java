@@ -40,7 +40,6 @@ import tn.esprit.springboot.utils.BillPdfExporter;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("bill")
-
 public class BillController {
 	
 	@Autowired
@@ -92,15 +91,11 @@ public class BillController {
 
 			@PostMapping("/checkout/{idBill}")
 			@ResponseBody
-			
-			
 			public Charge checkout (@RequestHeader("stripe-token") String token ,@PathVariable("idBill")Long idBill) throws Exception{
 				Bill bill =this.billService.getbillByid(idBill);
 				if (!bill.getPaymentType().equals(PaymentType.By_Card) ) {
 					throw new RuntimeException("payment type should be by card");
 				}
-			
-				
 					
 				 PaymentIntentDto  paymentIntentDto =new PaymentIntentDto();
 				 paymentIntentDto.setAmount(bill.getMontant());
@@ -110,9 +105,6 @@ public class BillController {
 				 bill.setPayed(true);
 				this.billService.updateBill(bill);
 				 return charge;
-				
-				
-
 			}
 
 

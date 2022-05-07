@@ -22,23 +22,14 @@ export class OrderService {
   getOrder()  {
     return this.http.get<Order[]>(`${this.baseUrl}/getAllOrder`, { observe: 'response' });
   }
- // public getOrder(): Observable<Order[]> {
-   // return this.http.get<Order[]>('http://localhost:8083/springmvc/order/getAllOrder');
-
-  //}
 
   createOrder(order: Order): Observable<HttpResponse<any>> {
     return this.http.post<Order>(`${this.baseUrl}/add-order`, order, { observe: 'response' });
   }
 
-
-  
-
-
   deleteOrder(id: number): Observable<any> {
   //return this.http.delete<void>(`${this.baseUrl}/delete-order/"${id}`);
   return this.http.delete(`${this.baseUrl}/delete-order/${id}`);
-
   }
 
   public updateOrder(order: Order): Observable<any> {

@@ -122,10 +122,10 @@ this.bill=bill;
     this.header = "Edit the bill is not difined";
 
 ;}
-openDialog(idBill:number): void {
+openDialog(bill: Bill): void {
   const dialogRef = this.dialog.open(CheckoutComponent, {
     width: '500px',
-    data: {idBill},
+    data: {bill},
   });
 
   dialogRef.afterClosed().subscribe(result => {
