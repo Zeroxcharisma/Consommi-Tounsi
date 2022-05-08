@@ -34,7 +34,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
     this.card = elements?.create('card');
     this.card?.mount('#card-element');
     this.card.addEventListener('change',()=>{
-      debugger
       // var displayError = document.getElementById('card-errors');
       // if (event.error) {
       //   displayError.textContent = event.error.message;
@@ -51,11 +50,10 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
         // var errorElement = document.getElementById('card-errors');
         // errorElement.textContent = result.error.message;
       } else {
-        debugger
         // Send the token to your server
         // stripeTokenHandler(result.token);
         this.billService.checkout(this.data.bill, result.token.id).subscribe(value => {
-          debugger
+
         })
       }
     });

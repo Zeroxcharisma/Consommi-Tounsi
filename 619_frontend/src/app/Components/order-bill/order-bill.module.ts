@@ -16,6 +16,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
+import { BillDialogComponent } from './bill/bill-dialog/bill-dialog.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { OrderDialogComponent } from './components/order-dialog/order-dialog.com
     BillfilterPipe,
     OrderBillLandingPage,
     OrderDialogComponent,
+    BillDialogComponent,
   ],
   imports: [
     CommonModule,

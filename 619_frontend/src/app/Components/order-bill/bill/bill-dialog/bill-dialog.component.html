@@ -1,0 +1,46 @@
+<div class ="container mt-5" >
+  <h2 *ngIf="idBill.value"> Modifier Bill </h2 >
+  <h2 *ngIf="!idBill.value"> Créer Bill </h2 >
+
+  <div class ="col">
+
+
+    <form  [formGroup] = "Form">
+      <mat-form-field appearance="legacy">
+        <mat-label  for="montant">montant</mat-label>
+        <input matInput type="number" id="montant"  class="bg-none" formControlName="montant" required>
+      </mat-form-field>
+    </form>
+    <form  [formGroup] = "Form">
+      <mat-form-field appearance="legacy">
+        <mat-label  for="dateBill">date</mat-label>
+        <input matInput type="date" id="dateBill"  class="bg-none" formControlName="dateBill" required>
+      </mat-form-field>
+    </form>
+
+    <form  [formGroup] = "Form">
+      <mat-form-field appearance="legacy">
+        <mat-label  for="paymentType">paymentType</mat-label>
+        <input matInput type="string" id="paymentType"  class="bg-none" formControlName="paymentType" required>
+      </mat-form-field>
+    </form>
+    <form  [formGroup] = "Form">
+      <mat-form-field appearance="legacy">
+        <mat-label  for="">order</mat-label>
+
+        <mat-select formControlName="order">
+          <mat-option *ngFor="let order of orders" [value]="order">
+            {{order.idOrder}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
+  </div>
+
+  <div class ="col">
+    <button pRipple class="btn btn-success" style="width: 110px;" (click)=" onSubmit()">Save</button>
+  </div>
+
+
+</div>

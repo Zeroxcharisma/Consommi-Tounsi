@@ -9,6 +9,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import {BillService} from "../bill.service";
 import {OrderService} from "../order.service";
+import {OrderDialogComponent, OrderDialogData} from "../components/order-dialog/order-dialog.component";
+import {BillDialogComponent, BillDialogData} from "./bill-dialog/bill-dialog.component";
 
 @Component({
   selector: 'app-bill',
@@ -17,23 +19,20 @@ import {OrderService} from "../order.service";
 })
 export class BillComponent implements OnInit {
 
-  Form = new FormGroup({});
+ Form = new FormGroup({});
  bill: Bill = new Bill();
- tab:any []=[] ;
+ tab:any[] = [];
  header:string="";
- orders:Order[]=[];
+ orders:Order[] = [];
 
-
- tableMode = true;
- editMode = false;
- addmode = false;
-
-
+ // tableMode = true;
+ // editMode = false;
+ // addmode = false;
 
   constructor(private billService:BillService,
     private fb: FormBuilder,
     private orderService:OrderService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,) { }
 
   ngOnInit(): void {
     this.getAllBills()
@@ -44,18 +43,12 @@ export class BillComponent implements OnInit {
     })
   }
 
-
-
   getAllBills() {
       this.billService.getBill().subscribe((data:any) => {
         let bill = data.body;
-        console.log(bill)
-        bill.forEach((element:any) => {
-          this.tab.push(element)
-        });
+        this.tab = bill;
       })
 }
-
 
   //create the order form group
   createBillGroup(){
@@ -71,23 +64,24 @@ export class BillComponent implements OnInit {
 
 
   onAdd(){
-    this.addmode = true;
-    this.editMode = false;
-    this.tableMode = false;
-    this.header = "Add New bill";
+    // this.addmode = true;
+    // this.editMode = false;
+    // this.tableMode = false;
+    // this.header = "Add New bill";
+    this.openDialog();
       }
 
 
 
- onSubnit(){
-   const bill = this.Form.value;
+ onSubmit(bill: Bill){
+   // const bill = this.Form.value;
    delete bill.idBill;
    this.billService.createBill(bill).subscribe((data: any) => {
       console.log(data);
-    this.tableMode = true;
-    this.editMode = false;
-    this.addmode = false;
-    window.location.reload();
+      this.getAllBills();
+    // this.tableMode = true;
+    // this.editMode = false;
+    // this.addmode = false;
     },
    );
 
@@ -106,27 +100,46 @@ onDelete(id:number){
 
 
 onupdateBill(bill: Bill): void {
-  this.tableMode = false;
-  this.editMode = true;
-  this.addmode = false;
+  // this.tableMode = false;
+  // this.editMode = true;
+  // this.addmode = false;
 this.Form.patchValue(bill);
 this.bill=bill;
+this.openDialog(bill);
 
 
-   if( this.bill.idBill !=""){
-    this.header = "Edit :" + this.bill.idBill ;
+  //  if( this.bill.idBill !=""){
+  //   this.header = "Edit :" + this.bill.idBill ;
+  // }
+  //   this.header = "Edit the bill is not difined";
+
   }
-    this.header = "Edit the bill is not difined";
 
-;}
-openDialog(bill: Bill): void {
+  openDialog(bill?: Bill): void {
+    const dialogRef = this.dialog.open(BillDialogComponent, {
+      width: '500px',
+      data: {bill},
+    });
+
+    dialogRef.afterClosed().subscribe((result:BillDialogData) => {
+     if (result?.bill){
+       if (bill){
+         this.billService.updateBill(result.bill).subscribe(() => this.getAllBills())
+         return;
+       }
+       this.onSubmit(result.bill);
+     }
+    });
+  }
+
+openCheckoutDialog(bill: Bill): void {
   const dialogRef = this.dialog.open(CheckoutComponent, {
     width: '500px',
     data: {bill},
   });
 
   dialogRef.afterClosed().subscribe(result => {
-     result;
+
   });
 }
 

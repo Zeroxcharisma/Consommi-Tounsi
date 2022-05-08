@@ -34,7 +34,7 @@ export class OrderComponent implements OnInit {
   constructor(
     private orderService:OrderService,
     private fb: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {

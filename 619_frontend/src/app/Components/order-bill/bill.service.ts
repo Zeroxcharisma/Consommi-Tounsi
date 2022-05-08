@@ -33,7 +33,7 @@ export class BillService {
 
 
   updateBill( bill: Bill): Observable<Object> {
-    return this.http.put<Bill>(`${this.baseUrl}/update-bill`, bill);
+    return this.http.put<Bill>(`${this.baseUrl}/modify-bill`, bill);
   }
 
 
