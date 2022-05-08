@@ -17,6 +17,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
 import { BillDialogComponent } from './bill/bill-dialog/bill-dialog.component';
+import {NgxStripeModule} from "ngx-stripe";
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { BillDialogComponent } from './bill/bill-dialog/bill-dialog.component';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
+    NgxStripeModule.forChild('pk_test_51KuYmkBFQEhC7HB0qdIrWwKqxwyTzvL1nx12flbe4SH2DcQ7oZcS03dmmSw61nlWXc6IooniggDGxRL5mgy372Ns007uxUtLFA'),
   ],
   providers: [OrderService],
 })

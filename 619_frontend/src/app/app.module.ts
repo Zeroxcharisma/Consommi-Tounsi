@@ -102,7 +102,7 @@ import { MatInputModule } from '@angular/material/input';
     NgbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgxStripeModule.forRoot('pk_test_51IziEXDGIe2QH5KPbwRWzkIgPxzHWJ21nzT9LMZdb01c5xNMDu8B1Vww6Z5Y60HVIfJPhdUU9D3J1VLN06mnBYvS00HUQItxxq'),
+    NgxStripeModule.forRoot('pk_test_51KuYmkBFQEhC7HB0qdIrWwKqxwyTzvL1nx12flbe4SH2DcQ7oZcS03dmmSw61nlWXc6IooniggDGxRL5mgy372Ns007uxUtLFA'),
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

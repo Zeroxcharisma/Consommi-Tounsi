@@ -38,9 +38,9 @@ export class BillService {
 
 
   checkout( bill: Bill, stripeToken:string): Observable<Object> {
-    let headers = new HttpHeaders();
-    headers = headers.set('stripe-token', stripeToken);
-    return this.http.post(`${this.baseUrl}/checkout/${bill.idBill}`, null,{headers});
+    // let headers = new HttpHeaders();
+    // headers = headers.set('stripe-token', stripeToken);
+    return this.http.post(`${this.baseUrl}/checkout/${bill.idBill}/${stripeToken}`, null,{  observe: 'response'});
   }
 
 

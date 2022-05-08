@@ -12,17 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import com.stripe.model.Charge;
@@ -89,9 +79,9 @@ public class BillController {
 						 //  public void billpdf (@PathVariable("idBill") Long idBill) {
 						   							// billService.billpdf(idBill); }
 
-			@PostMapping("/checkout/{idBill}")
+			@PostMapping("checkout/{idBill}/{stripeToken}")
 			@ResponseBody
-			public Charge checkout (@RequestHeader("stripe-token") String token ,@PathVariable("idBill")Long idBill) throws Exception{
+			public Charge checkout (@PathVariable("stripeToken") String token ,@PathVariable("idBill")Long idBill) throws Exception{
 				Bill bill =this.billService.getbillByid(idBill);
 				if (!bill.getPaymentType().equals(PaymentType.By_Card) ) {
 					throw new RuntimeException("payment type should be by card");

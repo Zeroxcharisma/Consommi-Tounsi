@@ -32,7 +32,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
     this.stripe = await loadStripe('pk_test_51KuYmkBFQEhC7HB0qdIrWwKqxwyTzvL1nx12flbe4SH2DcQ7oZcS03dmmSw61nlWXc6IooniggDGxRL5mgy372Ns007uxUtLFA');
     const elements = this.stripe?.elements();
     this.card = elements?.create('card');
-    this.card?.mount('#card-element');
+    this.card?.mount('#card-element0');
     this.card.addEventListener('change',()=>{
       debugger
       // var displayError = document.getElementById('card-errors');

@@ -1,13 +1,10 @@
-<div id="payment-form">
-  <div class="form-row">
-    <label for="card-element">
-      Credit or debit card
-    </label>
-    <div id="card-element">
-      <!-- a Stripe Element will be inserted here. -->
-    </div>
-    <!-- Used to display form errors -->
-    <div id="card-errors" role="alert"></div>
-  </div>
-  <button (click)="createToken()" class="submit"></button>
-</div>
+<form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
+  <input type="text" formControlName="name" placeholder="Jane Doe">
+  <ngx-stripe-card
+    [options]="cardOptions"
+    [elementsOptions]="elementsOptions"
+  ></ngx-stripe-card>
+  <button type="submit">
+    CREATE TOKEN
+  </button>
+</form>
