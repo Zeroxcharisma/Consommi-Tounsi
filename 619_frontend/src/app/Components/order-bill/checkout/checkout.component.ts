@@ -63,6 +63,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
       .createToken(this.card.element, { name })
       .subscribe((result) => {
         if (result.token) {
+          this.billService.checkout(this.data.bill, result.token.id).subscribe()
           // Use the token
           console.log(result.token.id);
         } else if (result.error) {

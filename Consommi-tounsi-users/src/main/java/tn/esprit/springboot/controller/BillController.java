@@ -81,7 +81,7 @@ public class BillController {
 
 			@PostMapping("checkout/{idBill}/{stripeToken}")
 			@ResponseBody
-			public Charge checkout (@PathVariable("stripeToken") String token ,@PathVariable("idBill")Long idBill) throws Exception{
+			public void checkout (@PathVariable("stripeToken") String token ,@PathVariable("idBill")Long idBill) throws Exception{
 				Bill bill =this.billService.getbillByid(idBill);
 				if (!bill.getPaymentType().equals(PaymentType.By_Card) ) {
 					throw new RuntimeException("payment type should be by card");
@@ -94,7 +94,6 @@ public class BillController {
 				 Charge charge=paymentservice.chargeCreditCard(token, paymentIntentDto);
 				 bill.setPayed(true);
 				this.billService.updateBill(bill);
-				 return charge;
 			}
 
 

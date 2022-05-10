@@ -27,8 +27,9 @@ public class PaymentService {
 
 
     public Charge chargeCreditCard(String token,  PaymentIntentDto  paymentIntentDto ) throws Exception {
+        Stripe.apiKey = "sk_test_51KuYmkBFQEhC7HB0VUqouZPSfSBPWqJt5IuetGRVpp3BiXTO9jw7ameU8YfryfuyqC4dhsR0bJqQ9Wmira1MnZOk00N0xZoggS";
         Map<String, Object> chargeParams = new HashMap<String, Object>();
-        chargeParams.put("amount",paymentIntentDto.getAmount()*100);
+        chargeParams.put("amount",(int) Math.round(paymentIntentDto.getAmount()*100));
         chargeParams.put("currency",paymentIntentDto.getCurrency());
         chargeParams.put("source", token);
         Charge charge = Charge.create(chargeParams);
