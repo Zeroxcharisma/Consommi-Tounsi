@@ -1,0 +1,106 @@
+<div class="col-md-6 offset-md-3">
+<h3> Create Product </h3>
+<form (ngSubmit) = "onSubmit()">
+
+  <div class="form-group">
+    <label> Product Name</label>
+    <input type="text" class ="form-control" id = "nameprod"
+           [(ngModel)] = "product.nameprod" name = "nameprod">
+  </div>
+
+  <div class="form-group">
+    <label> Price</label>
+    <input type="text" class ="form-control" id = "price"
+           [(ngModel)] = "product.price" name = "price">
+  </div>
+
+  <div class="form-group">
+    <label> Barcode</label>
+    <input type="text" class ="form-control" id = "barcodeprod"
+           [(ngModel)] = "product.barcodeprod" name = "barcodeprod">
+  </div>
+  <div class="form-group">
+    <label> Ajouter une image</label>
+    <input type="file" class="custom-file-input" id ="customFile"
+           [(ngModel)] = "product.imageFileNameProduct" name = "image">
+  </div>
+<!--  <div class="form-group">-->
+<!--    <input type="file" name="file" class="custom-file-input"-->
+<!--           id="customFile"> <label class="custom-file-label"-->
+<!--                                   for="customFile">Product Image</label>-->
+<!--  </div>-->
+
+  <button class = "btn btn-success" type ="submit" >Submit</button>
+
+</form>
+</div>
+<!--<form #H="ngForm" name="form">-->
+
+<!--  <div class="form-group">-->
+<!--    <label>Title Of Product : </label>-->
+<!--    <input class="form-control" type="text" required placeholder="Title Of Product"  id="titleProduct" name="titleProduct"-->
+<!--          >-->
+<!--  </div>-->
+
+<!--  <div class="form-group">-->
+<!--    <label>Product Desccription : </label>-->
+<!--    <input type="text"  class="form-control"required placeholder="descriptionProduct" id="descriptionProduct"-->
+<!--         name="descriptionProduct" >-->
+<!--  </div>-->
+
+
+<!--  <div class="form-group">-->
+<!--    <label>Product Quantity : </label>-->
+<!--    <input  class="form-control" type="number" required placeholder="quantityProduct" pattern="[1-9][0-9]"-->
+<!--            name="quantityProduct" >-->
+<!--  </div>-->
+
+
+
+<!--  <div class="form-group">-->
+<!--    <label>Product Initial Price : </label>-->
+<!--    <input  class="form-control" type="number" required placeholder="priceProduct" pattern="[1-9][0-9]" name="priceProduct"-->
+<!--            >-->
+<!--  </div>-->
+
+
+
+
+<!--  <div class="form-group">-->
+<!--    <label>Product Weight : </label>-->
+<!--    <input class="form-control" type="number" required placeholder="weightProduct"  name="weightProduct"-->
+<!--&gt;-->
+<!--  </div>-->
+
+
+<!--  <div class="form-group"></div>-->
+<!--  <label>Buying Price : </label>-->
+<!--  <input class="form-control" type="number" required placeholder="buyingPriceProduct"  pattern="[1-9][0-9]">-->
+<!--&lt;!&ndash;         name="buyingPriceProduct" [(ngModel)]="productToUpdate.buyingPriceProduct">&ndash;&gt;-->
+
+
+<!--  <div class="form-group"></div>-->
+<!--  <label>Product Diskount: </label>-->
+<!--  <input class="form-control" type="number" required placeholder="buyingPriceProduct"-->
+<!--         name="buyingPriceProduct" >-->
+
+
+<!--  <div class="form-group"></div>-->
+<!--  <label>Product Stock Quantity : </label>-->
+<!--  <input  class="form-control" type="number" required placeholder="maxQuantityProduct"  name="maxQuantityProduct"-->
+<!--          >-->
+
+
+<!--  <div class="form-group"></div>-->
+<!--  <label>Image Product : </label>-->
+<!--  <input class="form-control" type="file" required placeholder="Product Image"  name="fileName"-->
+<!--        >-->
+
+<!--  <br><br>-->
+
+<!--  <button type="button" id="appdateProduct" >-->
+<!--          class="btn btn-success">Update-->
+<!--    Product</button>-->
+
+
+<!--</form>-->

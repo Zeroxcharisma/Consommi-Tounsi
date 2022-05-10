@@ -1,0 +1,25 @@
+<nav class="navbar">
+<!--  <input type="form-control" type="text" name="firstName" [(ngModel)]="nameCategory" (ngModelChange)="Search()"-->
+<!--         placeholder="Enter product name ">-->
+</nav>
+
+<table class = "table table-striped">
+  <thead>
+  <tr>
+    <th> Category Name&nbsp; <i class="fa fa-sort"></i></th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor = "let category of categories " >
+
+    <td> {{ category.nameCategory }} </td>
+
+<!--    <td>-->
+<!--      <button (click) = "updateCategory(category.idCategory)" class = "btn btn-info"> Update </button>-->
+<!--      <button (click) = "deleteCategory(category.idCategory)" class = "btn btn-danger" style="margin-left: 10px"> Delete</button>-->
+<!--    </td>-->
+
+  </tr>
+  </tbody>
+</table>

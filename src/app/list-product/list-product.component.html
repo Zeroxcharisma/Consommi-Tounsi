@@ -1,0 +1,37 @@
+<nav class="navbar">
+  <input type="form-control" type="text" name="firstName" [(ngModel)]="nameprod" (ngModelChange)="Search()"
+         placeholder="Enter product name ">
+</nav>
+
+<table class = "table table-striped">
+  <thead>
+  <tr>
+    <th (click)="sort('nameprod')" > Product Name&nbsp; <i class="fa fa-sort"></i></th>
+    <th> Image</th>
+    <th (click)="sort('price')" > Price &nbsp; <i class="fa fa-sort"></i></th>
+    <th> Barcode</th>
+    <th> Weight </th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor = "let product of products | orderBy: key: reverse | paginate: {currentPage: p,itemsPerPage: 5}" >
+
+    <td> {{ product.nameprod }} </td>
+<!--    <td><img  src="{{'data:image/jpeg;base64,'+product.imageFileNameProduct}}" alt="logo" style="width: 100px;height: 100px;"></td>-->
+    <td><img style="margin-left: 20%;height: 100px" alt=""  src="{{'http://localhost:8083/springmvc/product/photoProduct/'+product.idprod}}"></td>
+    <td> {{ product.price }} </td>
+    <td> {{ product.barcodeprod }} </td>
+    <td> {{ product.weightprod }} </td>
+
+    <td>
+      <button (click) = "updateProduct(product.idprod)" class = "btn btn-info"> Update </button>
+      <button (click) = "deleteProduct(product.idprod)" class = "btn btn-danger" style="margin-left: 10px"> Delete</button>
+      <!--           <button (click) = "employeeDetails(employee.id)" class = "btn btn-info" style="margin-left: 10px"> View</button>
+      -->
+    </td>
+
+  </tr>
+  </tbody>
+  <pagination-controls (pageChange)="p=$event"></pagination-controls>
+</table>
