@@ -24,12 +24,10 @@ export class ProductAdministratorComponent implements OnInit {
   updateProductInt: boolean;
   showIntAddProd: boolean;
   showIntUpdateProd: boolean;
-  tunisianBarCodeCheck: string;
   public message: string;
   public imagePath;
   imgURL: any;
   product: Product = new Product();
-  response: BarcodeResponse;
   id: number;
   file: File;
   file_upload: object;
@@ -52,7 +50,6 @@ export class ProductAdministratorComponent implements OnInit {
   }
   ngOnInit(): void {
     this.prodSerivce.getAllProducts().subscribe((res) => {
-      console.log(res);
       this.ListProducts = res;
     });
     this.createForm();
@@ -116,7 +113,6 @@ export class ProductAdministratorComponent implements OnInit {
       filename = filename.substring(1);
     }
     this.product.fileName = filename;
-    this.product.barcodeProduct = this.file_upload;
     console.log(this.product);
 
     var b = Number(this.product.UnderCategory);
@@ -127,7 +123,7 @@ export class ProductAdministratorComponent implements OnInit {
         this.ListProducts = res;
       })
     );
-    this.router.navigate(['/administrator/product']);
+    this.router.navigate(['/client/product']);
   }
 
   UpdateProductShowDiv() {

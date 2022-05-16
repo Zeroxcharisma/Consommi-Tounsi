@@ -6,10 +6,6 @@ import { CategoryService } from 'src/app/Services/Category/category.service';
 import { UndercategoryService } from 'src/app/Services/UnderCategory/undercategory.service';
 
 
-
-
-
-
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',

@@ -36,8 +36,7 @@ export class ProductService {
   }
 
 
-  addProduct(product: Product, id: number, idd: number) {
-    // return this.prodhttp.post<Product>(this.addProdUrl + id + idd, product);
+  addProduct(product: Product, id: number, idd: number) {//produit+underc+dep
     return this.prodhttp.post(`${this.addProdUrl}/${id}/${idd}`, product, {});
   }
 
@@ -46,10 +45,9 @@ export class ProductService {
     return this.prodhttp.put(this.putProdUrl + id, product);
   }
 
-
+//pour faire un form
   createData(formData: FormData): Observable<any> {
     return this.prodhttp.post(`${this.PostProdcutUrl}`, formData);
-    // return this.prodhttp.post(`${this.PostProdcutUrl}`, formData);
   }
 
 
@@ -57,10 +55,24 @@ export class ProductService {
 
     return this.prodhttp.delete(`${this.deleteAvance}/${id}`, { responseType: 'text' });
   }
-  // addProdToBasket(idBask: number, idProd: number) {
-  //   //   return this.prodhttp.post(`${this.addProdToBasketUrl}/${idBask}/${idProd}`,{});
-  //   return this.prodhttp.post("http://localhost:9091/SpringMVC/servlet/AffectProdToBasket/" + idBask + "/" + idProd, {});
-  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

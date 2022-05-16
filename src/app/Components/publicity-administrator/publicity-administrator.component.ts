@@ -76,9 +76,11 @@ export class PublicityAdministratorComponent implements OnInit {
     this.publicity.fileName = filename;
     console.log('--', filename);
     console.log(this.publicity);
-    this.PublicityService.addPublicity(this.publicity).subscribe(() => this.PublicityService.getAllPublicities().subscribe(res => { this.ListPublicities = res; }));
+    this.PublicityService.addPublicity(this.publicity).subscribe(() =>
+      this.PublicityService.getAllPublicities().subscribe(res => { this.ListPublicities = res; }));
     console.log('Lenghth after add', this.ListPublicities.length);
 
+    this.router.navigate(['http://localhost:4200/']);
   }
 
   updatePublicity(id: number, publicity: Publicity) {

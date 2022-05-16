@@ -16,10 +16,8 @@ export class CategoryadministratorComponent implements OnInit {
   ListUnderCategories: UnderCategory[];
   category: Category = new Category();
   undercategory: UnderCategory = new UnderCategory();
-
   manageCatInterface: boolean;
   manageunderCatInterface: boolean;
-
 
   constructor(private router: Router, private categoryService: CategoryService, private underCatService: UndercategoryService) { }
 
@@ -46,14 +44,16 @@ export class CategoryadministratorComponent implements OnInit {
 
   }
   addCategory() {
-    return this.categoryService.addCategory(this.category).subscribe(() => this.categoryService.getAllCategories().subscribe(res => { this.ListCategories = res }));
+    return this.categoryService.addCategory(this.category).subscribe(() =>
+      this.categoryService.getAllCategories().subscribe(res => { this.ListCategories = res }));
+
   }
 
   deleteCategory(idCat: number) {
     this.categoryService.deleteCategoryById(idCat).subscribe(() => this.categoryService.getAllCategories().subscribe(res => { this.ListCategories = res }));
   }
 
-  // Crud Under Catgory 
+  // Crud Under Catgory
   showManageUnderCayegoryInterface() {
     this.manageCatInterface = false;
     this.manageunderCatInterface = true;
@@ -66,11 +66,14 @@ export class CategoryadministratorComponent implements OnInit {
   addUnderCategory() {
     var b = Number(this.undercategory.Category)
     console.log(this.undercategory)
-    return this.underCatService.addUndercategory(this.undercategory, b).subscribe(() => this.underCatService.getAllUnderCat().subscribe(res => { this.ListUnderCategories = res }));
+     this.underCatService.addUndercategory(this.undercategory, b).subscribe(() =>
+      this.underCatService.getAllUnderCat().subscribe(res => { this.ListUnderCategories = res }));
+    this.router.navigate(['/home/category']);
   }
 
   deleteUnderCategory(idUnderCat: number) {
-    this.underCatService.DeleteUnderCat(idUnderCat).subscribe(() => this.underCatService.getAllUnderCat().subscribe(res => { this.ListUnderCategories = res }));
+    this.underCatService.DeleteUnderCat(idUnderCat).subscribe(() =>
+      this.underCatService.getAllUnderCat().subscribe(res => { this.ListUnderCategories = res }));
   }
 }
 
